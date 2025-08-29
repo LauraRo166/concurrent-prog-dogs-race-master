@@ -10,13 +10,26 @@ Creación, puesta en marcha y coordinación de hilos.
 
 1. Revise el programa “primos concurrentes” (en la carpeta parte1), dispuesto en el paquete edu.eci.arsw.primefinder. Este es un programa que calcula los números primos entre dos intervalos, distribuyendo la búsqueda de los mismos entre hilos independientes. Por ahora, tiene un único hilo de ejecución que busca los primos entre 0 y 30.000.000. Ejecútelo, abra el administrador de procesos del sistema operativo, y verifique cuantos núcleos son usados por el mismo.
 
+<img width="2879" height="1709" alt="image" src="https://github.com/user-attachments/assets/f72d0ead-4b00-4cbb-baa1-dfb58aba7868" />
+
+Vemos que el porcentaje de uso de CPU es del 78%.
+
 2. Modifique el programa para que, en lugar de resolver el problema con un solo hilo, lo haga con tres, donde cada uno de éstos hará la tarcera parte del problema original. Verifique nuevamente el funcionamiento, y nuevamente revise el uso de los núcleos del equipo.
+
+
+<img width="2879" height="1711" alt="image" src="https://github.com/user-attachments/assets/4220a41a-ee0c-4ef5-95a7-559db349d7f4" />
+
+En este caso, ahora vemos que el porcentaje de uso de CPU ha aumentado: es del 89%.
+
+Podemos apreciar un aumento en el uso de núcleos al ejecutar el algoritmo de solución con tres hilos.
 
 3. Lo que se le ha pedido es: debe modificar la aplicación de manera que cuando hayan transcurrido 5 segundos desde que se inició la ejecución, se detengan todos los hilos y se muestre el número de primos encontrados hasta el momento. Luego, se debe esperar a que el usuario presione ENTER para reanudar la ejecución de los mismo.
 
+### Explicación 
 
+La sincronización mediante synchronized, junto con los métodos wait() y notifyAll(), es fundamental para coordinar correctamente la ejecución de múltiples hilos en esta aplicación. El uso de synchronized en los métodos pauseThread() y resumeThread() garantiza que solo un hilo a la vez pueda modificar la variable compartida paused, evitando condiciones de carrera. Por su parte, el método run() incluye un bloque synchronized que encierra el while (paused) y la llamada a wait(), ya que en Java es obligatorio invocar wait() solo cuando el hilo posee el candado del objeto (es decir, dentro de una sección sincronizada). Además, este patrón asegura que los hilos revisen y esperen sobre una condición (paused) de manera segura: si paused es true, el hilo se bloquea; si luego otro hilo ejecuta resumeThread() y llama a notifyAll(), el hilo en espera se despierta, vuelve a adquirir el candado y continúa ejecutando solo si la condición ha cambiado. Esta coordinación evita bloqueos indefinidos y permite pausar y reanudar los hilos correctamente durante la ejecución.
 
-##### Parte II 
+## Parte II 
 
 
 Para este ejercicio se va a trabajar con un simulador de carreras de galgos (carpeta parte2), cuya representación gráfica corresponde a la siguiente figura:
