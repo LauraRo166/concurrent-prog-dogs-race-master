@@ -53,11 +53,11 @@ e iniciar los hilos:
 
 Con esto pasamos de este resultado donde se observa que el ganador es null:
 
-{Imagen en consola de ganado=Null}
+<img width="980" height="914" alt="image" src="https://github.com/user-attachments/assets/b41c9cc3-2696-40fa-a821-af498847c7f5" />
 
 A este resultado, donde ya se obtiene un galgo como ganador:
 
-{Imagen en consola donde aparece un galgo como ganador}
+<img width="974" height="911" alt="image" src="https://github.com/user-attachments/assets/d8ef8b60-516a-4e7f-bbd8-88daf0438946" />
 
 **2.**  *Una vez corregido el problema inicial, corra la aplicación varias
     veces, e identifique las inconsistencias en los resultados de las
@@ -69,21 +69,21 @@ A este resultado, donde ya se obtiene un galgo como ganador:
 Después de correr la aplicación múltiples veces se observó que en los resultados varios galgos
 obtenían la misma posición, incluyendo el puesto ganador. 
 
-{Imagen ejecucion incorrecta}
+<img width="359" height="370" alt="image" src="https://github.com/user-attachments/assets/4c27e270-ae82-4a3c-b91c-c1f784b68d64" />
 
 A partir de esto se identificaron las siguientes zonas críticas:
 
 - En ***RegistroLlegada*** en el método ***setGanador***:
 
-{Imagen fragmento código}
+<img width="856" height="122" alt="image" src="https://github.com/user-attachments/assets/4eb5e66b-72fb-4357-b9f9-6721d865cfb9" />
 
 - En ***RegistroLlegada*** en el método ***getUltimaPosicionAlcanzada***:
   
-{Imagen fragmento código}
+<img width="856" height="111" alt="image" src="https://github.com/user-attachments/assets/ec2b96b3-65f2-41be-82e7-4e1a72a159b5" />
 
 - En ***RegistroLlegada*** en el método ***setUltimaPosicionAlcanzada***:
 
-{Imagen fragmento código}
+<img width="901" height="106" alt="image" src="https://github.com/user-attachments/assets/91a34067-2f5e-4f0f-8e19-5df60171cf5a" />
 
 
 **3.**  *Utilice un mecanismo de sincronización para garantizar que a dichas
@@ -92,7 +92,7 @@ A partir de esto se identificaron las siguientes zonas críticas:
 
 Se implementa en los métodos de la clase ***RegistroLlegada***:
 
-{Imagen de sync en registrollegada}
+<img width="966" height="847" alt="image" src="https://github.com/user-attachments/assets/19b9c347-6bb6-446d-8511-67325abd44f2" />
 
 
 **4.**  *Implemente las funcionalidades de pausa y continuar. Con estas,
@@ -108,7 +108,7 @@ estáticas, para que todos los Galgos compartan el mismo ***lock*** y la misma v
     private static final Object lock = new Object();
     private static boolean pausado = false;
 
-{Imagen de métodos implementados}
+<img width="546" height="333" alt="image" src="https://github.com/user-attachments/assets/013034e2-d021-467b-a131-2712f3642d62" />
 
 Además, se agrega en el método ***corra*** al iniciar el while de tal forma:
 
@@ -120,9 +120,9 @@ Además, se agrega en el método ***corra*** al iniciar el while de tal forma:
 
 En la clase ***MainCanodromo*** se implementa:
 
-{Imagen actions}
+<img width="540" height="583" alt="image" src="https://github.com/user-attachments/assets/6f17d483-c643-49b5-919b-aadae4130211" />
 
 
 Se realizan pruebas pausando y resumiendo repetidamente, se obtienen los siguientes resultados:
 
-{Imagen resultado paus y cont}
+<img width="330" height="546" alt="image" src="https://github.com/user-attachments/assets/71a7e619-bf23-4b27-8706-847784dc01d6" />
